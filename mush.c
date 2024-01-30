@@ -22,10 +22,19 @@ int main(){
       i++;
       tokenized_string = strtok(NULL, " ,.");
     }
-    
+
     argument_list[i] = NULL;
+
+    pid_t pid = fork();
+
+    if (pid == 0){
     execvp(argument_list[0],argument_list);
+    perror("execvp");
+    exit(1);
+    }  
   }
+  wait(NULL);
+
 
 
 
